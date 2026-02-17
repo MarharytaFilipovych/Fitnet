@@ -33,5 +33,11 @@
         <Link>Contracts.http</Link>
       </Content>
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Fitnet.BeautifulEvents\Fitnet.BeautifulEvents.csproj" />
+      <ProjectReference Include="..\Modules\Passes\Passes.Infrastructure\Passes.Infrastructure.csproj" />
+      <ProjectReference Include="..\Modules\Passes\Passes.Presentation\Passes.Presentation.csproj" />
+    </ItemGroup>
   
 </Project>

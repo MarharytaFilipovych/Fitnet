@@ -1,8 +1,8 @@
 namespace EvolutionaryArchitecture.Fitnet.UnitTests;
 
-using EvolutionaryArchitecture.Fitnet.Common.BusinessRulesEngine;
 using Common.ErrorHandling;
 using System.Net;
+using Common.BusinessRulesEngine;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

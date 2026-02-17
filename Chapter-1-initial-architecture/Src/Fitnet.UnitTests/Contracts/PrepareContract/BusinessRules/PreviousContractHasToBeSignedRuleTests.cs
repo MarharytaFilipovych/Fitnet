@@ -1,20 +1,16 @@
 namespace EvolutionaryArchitecture.Fitnet.UnitTests.Contracts.PrepareContract.BusinessRules;
 
+using Common.BusinessRulesEngine;
 using Fitnet.Contracts.PrepareContract.BusinessRules;
-using EvolutionaryArchitecture.Fitnet.Common.BusinessRulesEngine;
 
 public sealed class PreviousContractHasToBeSignedRuleTests
 {
     [Fact]
     internal void Given_previous_contract_signed_Then_validation_should_pass() =>
-        // Arrange
-        // Act & Assert
         Should.NotThrow(() => BusinessRuleValidator.Validate(new PreviousContractHasToBeSignedRule(true)));
 
     [Fact]
     internal void Given_previous_contract_not_exists_Then_validation_should_pass() =>
-        // Arrange
-        // Act & Assert
         Should.NotThrow(() => BusinessRuleValidator.Validate(new PreviousContractHasToBeSignedRule(null)));
 
     [Fact]

@@ -6,7 +6,6 @@ using Common.TestEngine.Time;
 using Fitnet.Contracts.SignContract.Events;
 using Fitnet.Reports;
 using Fitnet.Reports.GenerateNewPassesRegistrationsPerMonthReport.Dtos;
-using Passes.RegisterPass;
 using TestData;
 
 public sealed class GenerateNewPassesPerMonthReportTests : IClassFixture<WebApplicationFactory<Program>>, IClassFixture<DatabaseContainer>, IAsyncLifetime
@@ -61,7 +60,7 @@ public sealed class GenerateNewPassesPerMonthReportTests : IClassFixture<WebAppl
     {
         using var integrationEventHandlerScope =
             new IntegrationEventHandlerScope<ContractSignedEvent>(_applicationInMemoryFactory);
-        var integrationEventHandler = integrationEventHandlerScope.IntegrationEventHandler;
+        var integrationEventHandler = integrationEventHandlerScope.IntegrationEventProcessor;
         var @event = ContractSignedEventFaker.Create(from, to);
         await integrationEventHandler.Handle(@event, CancellationToken.None);
     }

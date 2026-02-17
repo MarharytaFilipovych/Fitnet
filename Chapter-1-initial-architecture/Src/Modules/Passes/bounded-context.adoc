@@ -1,0 +1,25 @@
+= Task 1
+
+I chose the *Passes* module.
+
+Its role is to automatically create customer passes after contract signing, marking passes as expired (when they are out of date), storing and retrieving information about the passes.
+
+== It is not responsible for:
+
+* contact signing (or creating) process itself, which is the responsibility of the Contracts module: it just registers a pass in response to the contract signing event.
+
+* creating or modifying offers for customers and sending renewal offers when the pass expires
+
+* capturing registrations
+
+== Data that belongs to this module:
+
+There is only one main entity - `Pass` with such attributes (fields):
+
+* *id*
+
+* *customer id* (without customer details!)
+
+* *from date* (date of activaion)
+
+* *to date* (date of expiration)

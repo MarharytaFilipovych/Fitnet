@@ -1,0 +1,43 @@
+= Task 3
+
+== Passes module facade service
+
+I can create an `IPassesService` that will act as a single public interface (contract) for other modules, something like that:
+
+[source,csharp]
+----
+public interface IPassesService
+{
+    Task<PassDto?> GetPassByIdAsync(Guid passId, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<PassDto>> GetAllPassesAsync(CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<PassDto>> GetPassesByCustomerIdAsync(Guid customerId, CancellationToken cancellationToken = default);
+    Task MarkPassAsExpiredAsync(Guid passId, CancellationToken cancellationToken = default);
+}
+
+public record PassDto(Guid Id, Guid CustomerId)
+{
+    public static PassDto From(Pass contract) => new(contract.Id, contract.CustomerId);
+}
+----
+
+== The API of this module:
+
+=== HTTP REST API:
+
+* `GET /api/passes` - get all passes and their info
+* `GET /api/passes/{id}` - get info about a specific pass
+* `GET /api/passes/customer/{customerId}` - get info about a specific customer's passes
+* `PATCH /api/passes/{id}` - mark a specific pass as expired
+
+=== Published events:
+
+* `PassRegisteredEvent` - when a new pass created
+* `PassExpiredEvent` - when a pass expires
+
+=== Consumed events:
+
+* `ContractSignedEvent` - when received a new pass is registered
+
+== How would other modules talk to it?
+
+Other modules would talk to it through HTTP with the help of clear defined REST API contracts (you may consider GRPC or GraphQL as well, but I like REST more) and some message brokers (Kafka, RabbitMq, message brokers within different cloud providers like Amazon MQ, PubSub etc).

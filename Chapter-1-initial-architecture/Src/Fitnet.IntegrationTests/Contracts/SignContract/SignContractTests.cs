@@ -1,12 +1,11 @@
 namespace EvolutionaryArchitecture.Fitnet.IntegrationTests.Contracts.SignContract;
 
+using BeautifulEvents;
 using EvolutionaryArchitecture.Fitnet.Contracts;
 using EvolutionaryArchitecture.Fitnet.Contracts.PrepareContract;
 using EvolutionaryArchitecture.Fitnet.Contracts.SignContract;
 using PrepareContract;
 using Common.TestEngine.Configuration;
-using Fitnet.Contracts.SignContract.Events;
-using EvolutionaryArchitecture.Fitnet.Common.Events.EventBus;
 using Microsoft.AspNetCore.Mvc;
 
 public sealed class SignContractTests : IClassFixture<WebApplicationFactory<Program>>, IClassFixture<DatabaseContainer>, IAsyncLifetime

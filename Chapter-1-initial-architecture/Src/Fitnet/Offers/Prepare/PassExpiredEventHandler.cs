@@ -1,15 +1,13 @@
 namespace EvolutionaryArchitecture.Fitnet.Offers.Prepare;
 
+using BeautifulEvents;
 using Data;
 using Data.Database;
-using Passes.MarkPassAsExpired.Events;
-using Common.Events;
-using Common.Events.EventBus;
 
-internal sealed class PassExpiredEventHandler(
+internal sealed class PassExpiredEventProcessor(
     IEventBus eventBus,
     OffersPersistence persistence,
-    TimeProvider timeProvider) : IIntegrationEventHandler<PassExpiredEvent>
+    TimeProvider timeProvider) : IIntegrationEventProcessor<PassExpiredEvent>
 {
     public async Task Handle(PassExpiredEvent @event, CancellationToken cancellationToken)
     {

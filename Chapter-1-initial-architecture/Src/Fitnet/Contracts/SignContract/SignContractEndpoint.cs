@@ -2,7 +2,6 @@ namespace EvolutionaryArchitecture.Fitnet.Contracts.SignContract;
 
 using BeautifulEvents;
 using Data.Database;
-using Events;
 using Common.Validation.Requests;
 
 internal static class SignContractEndpoint

@@ -1,19 +1,18 @@
 namespace EvolutionaryArchitecture.Passes.Application.UseCases.RegisterPass;
 
 using Domain;
-using Events;
 using Contracts;
-using Fitnet.BeautifulEvents;
 
-public sealed class RegisterPass(IPassRepository repository, IEventBus eventBus)
+public sealed class RegisterPass(IPassRepository repository)
 {
+    private const string EventName = "PassRegistered";
     public async Task ExecuteAsync(RegisterPassRequest request, CancellationToken cancellationToken = default)
     {
         var pass = Pass.Register(request.CustomerId, request.From, request.To);
-        await repository.AddAsync(pass, cancellationToken);
+        var payload = $"{EventName}:{pass.Id}";
+        var outboxMessage = OutboxMessage.Create(EventName, payload);
+        var saga = PassRegistrationSaga.Start(pass.Id);
+        await repository.AddAsync(pass, outboxMessage, saga, cancellationToken);
         await repository.SaveChangesAsync(cancellationToken);
-
-        var passRegisteredEvent = PassRegisteredEvent.Create(pass.Id);
-        await eventBus.PublishAsync(passRegisteredEvent, cancellationToken);
     }
 }

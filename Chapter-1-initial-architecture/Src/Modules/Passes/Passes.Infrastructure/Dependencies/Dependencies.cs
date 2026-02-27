@@ -1,12 +1,9 @@
 ﻿namespace EvolutionaryArchitecture.Passes.Infrastructure.Dependencies;
 
 using Application.Contracts;
-using Application.EventProcessors;
-using Application.Events;
 using Application.UseCases.GetAllPasses;
 using Application.UseCases.MarkPassAsExpired;
 using Application.UseCases.RegisterPass;
-using Fitnet.BeautifulEvents;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,16 +16,16 @@ public static class Dependencies
     {
         services.AddScoped<GetAllPasses>();
         services.AddScoped<MarkPassAsExpired>();
-        services.AddScoped<IIntegrationEventProcessor<ContractSignedEvent>, ContractSignedEventProcessor>();
-
         services.AddScoped<RegisterPass>();
     }
+
     public static void UsePasses(this IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<PassesDbContext>();
         context.Database.Migrate();
     }
+
     public static void AddPassesInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<PassesPersistenceOptions>(
@@ -44,5 +41,7 @@ public static class Dependencies
         });
 
         services.AddScoped<IPassRepository, PassRepository>();
+
+        services.AddHostedService<OutboxProcessor>();
     }
 }

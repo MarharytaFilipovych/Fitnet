@@ -1,7 +1,6 @@
 ﻿namespace EvolutionaryArchitecture.Passes.Application.EventProcessors;
 
 using Fitnet.BeautifulEvents;
-using Events;
 using UseCases.RegisterPass;
 
 public sealed class ContractSignedEventProcessor(RegisterPass registerPass) : IIntegrationEventProcessor<ContractSignedEvent>

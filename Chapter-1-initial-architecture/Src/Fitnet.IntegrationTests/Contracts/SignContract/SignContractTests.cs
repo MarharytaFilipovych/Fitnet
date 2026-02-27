@@ -6,7 +6,6 @@ using EvolutionaryArchitecture.Fitnet.Contracts.PrepareContract;
 using EvolutionaryArchitecture.Fitnet.Contracts.SignContract;
 using PrepareContract;
 using Common.TestEngine.Configuration;
-using Fitnet.Contracts.SignContract.Events;
 using Microsoft.AspNetCore.Mvc;
 
 public sealed class SignContractTests : IClassFixture<WebApplicationFactory<Program>>, IClassFixture<DatabaseContainer>, IAsyncLifetime

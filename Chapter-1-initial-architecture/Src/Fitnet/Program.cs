@@ -6,6 +6,7 @@ using EvolutionaryArchitecture.Fitnet.Common.Validation.Requests;
 using EvolutionaryArchitecture.Fitnet.Contracts;
 using EvolutionaryArchitecture.Fitnet.Offers;
 using EvolutionaryArchitecture.Fitnet.Reports;
+using EvolutionaryArchitecture.Passes.Application.EventProcessors;
 using EvolutionaryArchitecture.Passes.Infrastructure.Dependencies;
 using EvolutionaryArchitecture.Passes.Presentation;
 
@@ -16,7 +17,13 @@ builder.Services.AddExceptionHandling();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEventBus();
-builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+builder.Services.AddMediatR(configuration =>
+    {
+        configuration.RegisterServicesFromAssembly(typeof(Program).Assembly);
+        configuration.RegisterServicesFromAssembly(typeof(ContractSignedEventProcessor).Assembly);
+    });
+
 builder.Services.AddRequestsValidations();
 builder.Services.AddClock();
 

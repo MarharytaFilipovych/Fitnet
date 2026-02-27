@@ -1,8 +1,6 @@
-namespace EvolutionaryArchitecture.Fitnet.Contracts.SignContract.Events;
+namespace EvolutionaryArchitecture.Fitnet.BeautifulEvents;
 
-using BeautifulEvents;
-
-internal record ContractSignedEvent(
+public record ContractSignedEvent(
     Guid Id,
     Guid ContractId,
     Guid ContractCustomerId,
@@ -10,7 +8,7 @@ internal record ContractSignedEvent(
     DateTimeOffset ExpireAt,
     DateTimeOffset OccurredDateTime) : IIntegrationEvent
 {
-    internal static ContractSignedEvent Create(
+    public static ContractSignedEvent Create(
         Guid contractId,
         Guid contractCustomerId,
         DateTimeOffset signedAt,

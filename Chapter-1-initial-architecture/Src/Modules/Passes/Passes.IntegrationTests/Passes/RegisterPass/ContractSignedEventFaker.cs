@@ -1,7 +1,7 @@
 namespace EvolutionaryArchitecture.Passes.IntegrationTests.Passes.RegisterPass;
 
 using Bogus;
-using Application.Events;
+using Fitnet.BeautifulEvents;
 
 internal sealed class ContractSignedEventFaker : Faker<ContractSignedEvent>
 {
